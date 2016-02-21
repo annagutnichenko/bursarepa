@@ -26,3 +26,21 @@ class SeniorDeveloper < Developer
   end
 end
 
+dev3 = SeniorDeveloper.new('ыут')
+dev3.add_task('cs')
+dev3.add_task('cs')
+dev3.add_task('cs')
+dev3.add_task('cs')
+dev3.add_task('cs')
+dev3.add_task('cs')
+dev3.add_task('cs')
+dev3.add_task('cs')
+dev3.add_task('cs')
+dev3.add_task('cs')
+dev3.add_task('cs')
+dev3.add_task('cs')
+dev3.add_task('cs')
+dev3.add_task('cs')
+dev3.add_task('cs')
+
+dev3.status

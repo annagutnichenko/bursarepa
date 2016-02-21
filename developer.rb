@@ -8,12 +8,16 @@ class Developer
 
   MAX_TASKS = 10
 
+  def max_tasks
+    self.class::MAX_TASKS
+  end
+
   def add_task(task)
     @task = task
     @tasks_number += 1
     p "#{@name}: добавлена задача #{task}. Всего в списке задач: #{@tasks_number}"
     @tasks_list << @task
-    raise "Слишком много работы!" if @tasks_number >= MAX_TASKS
+    raise "Слишком много работы!" if @tasks_number >= max_tasks
   end
 
   def tasks
@@ -31,15 +35,15 @@ class Developer
     case
       when @tasks_number == 0
         p "свободен"
-      when @tasks_number < MAX_TASKS
+      when @tasks_number < max_tasks
         p "работаю"
-      when @tasks_number >= MAX_TASKS
+      when @tasks_number >= max_tasks
         p "занят"
     end
   end
 
   def can_add_task?
-    p @tasks_number < MAX_TASKS ? true : false
+    p @tasks_number < max_tasks ? true : false
   end
 
   def can_work?
