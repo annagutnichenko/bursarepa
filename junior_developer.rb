@@ -25,11 +25,3 @@ class JuniorDeveloper < Developer
 
 end
 
-dev2 = JuniorDeveloper.new('jun')
-dev2.add_task('cs')
-dev2.add_task('cs')
-dev2.add_task('cs')
-dev2.add_task('cs')
-dev2.add_task('cs')
-
-№ dev2.status
