@@ -9,11 +9,11 @@ class Developer
   MAX_TASKS = 10
 
   def add_task(task)
-    @@task = task
+    @task = task
     @tasks_number += 1
     p "#{@name}: добавлена задача #{task}. Всего в списке задач: #{@tasks_number}"
-    @tasks_list << @@task
-    raise "Слишком много работы!" unless @tasks_number < MAX_TASKS
+    @tasks_list << @task
+    raise "Слишком много работы!" if @tasks_number >= MAX_TASKS
   end
 
   def tasks
@@ -47,14 +47,3 @@ class Developer
   end
 
 end
-
-#dev = Developer.new('Аня')
-
-#dev.add_task('Попить водички')
-
-#dev.work!
-#dev.tasks
-
-#dev.status
-#dev.can_add_task?
-#dev.can_work?
