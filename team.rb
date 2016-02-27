@@ -14,10 +14,17 @@ class Team
     @seniors = @team[:seniors]
     @developers = @team[:developers]
     @juniors = @team[:juniors]
+
   end
 
-  def team_hash
-    @team
+  def on_task(type, &block)
+    instance_eval &block
+    on_task.call
+  end
+
+  def add_task(task)
+    dev.add_task(task)
+    block.call(dev, task)
   end
 
   def have_seniors(*names)
@@ -36,17 +43,9 @@ class Team
    # @team.sort_by
   #end
 
-
-
-# def on_task
-#  :junior do | dev, task |
-# puts "Отдали задачу #{task} разработчику #{dev.name}, следите за ним!"
-# end
-
-# def on_task
-#  :senior do | dev, task |
-#  puts "#{dev.name} сделает #{task}, но просит больше с такими глупостями не приставать"
-#  end
+    def all
+      @team.values.flatten
+    end
 
 end
 
@@ -55,11 +54,13 @@ team = Team.new do
   have_seniors "Олег", "Оксана"
   have_developers "Олеся", "Василий", "Игорь-Богдан"
   have_juniors "Владислава", "Аркадий", "Рамеш"
+  on_task(:junior){
+    puts "Отдали задачу #{task} разработчику #{dev.name}, следите за ним!"
+  }
 end
 
-pp team.team_hash
 
-
+p team.on_task
 
 
 
