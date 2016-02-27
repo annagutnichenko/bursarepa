@@ -8,6 +8,8 @@ class Developer
 
   MAX_TASKS = 10
 
+  GROUP = 'developer'
+
   def max_tasks
     self.class::MAX_TASKS
   end
