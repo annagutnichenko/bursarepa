@@ -4,6 +4,8 @@ class JuniorDeveloper < Developer
 
   MAX_TASKS = 5
 
+  var type :junior
+
   def add_task(task)
     @task = task
     @tasks_number += 1

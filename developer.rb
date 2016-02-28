@@ -1,5 +1,7 @@
 class Developer
 
+  attr_reader :type
+
   def initialize(name)
     @name = name
     @tasks_number = 0
@@ -8,7 +10,9 @@ class Developer
 
   MAX_TASKS = 10
 
-  GROUP = 'developer'
+  def type
+    @type='developer'
+  end
 
   def max_tasks
     self.class::MAX_TASKS
