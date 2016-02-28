@@ -1,36 +1,39 @@
 require 'pry'
-require_relative 'developer'
-require_relative 'junior_developer'
-require_relative 'senior_developer'
 
 class Team
+  attr_reader :height
+  attr_reader :age
+  attr_writer :age
 
-  attr_reader :seniors, :developers, :juniors
-
-  def initialize(&block)
-    instance_eval &block
+  def initialize(height, age)
+    @height = height
+    @age = age
   end
 
-  def have_developers(*names)
-    @developers = names.map { |name| Developer.new(name) }
-    @dnames = [names]
-  end
-
-  def have_seniors(*names)
-    @seniors = names.map { |name| SeniorDeveloper.new(name) }
-    @snames = [names]
-  end
-
-  def have_juniors(*names)
-    @juniors = names.map { |name| JuniorDeveloper.new(name) }
-    @jnames = [names]
+  def sorted
+    arr = {1=>"f",3=>"s",10=>"t", 0=>"z", 7=>"s"}
+    return arr.sort_by{|x,y| x}
   end
 
 end
-p team.seniors
-team = Team.new do
-  have_seniors "Олег", "Оксана"
-  have_developers "Олеся", "Василий", "Игорь-Богдан"
-  have_juniors "Владислава", "Аркадий", "Рамеш"
-end
+team = Team.new('167', '27')
 
+
+#team.height = '168'
+team.age = '28'
+
+# p team.age
+# p team.height
+#p team.sorted
+
+
+прототипы для наших on_task и add_task
+# принимает блок и имя фильтра и запоминает его
+def add_filter(name, &block)
+  @filters[name] = block
+end
+# принимает имя фильтра и аргументы фильтра
+def filter(name, *arg)
+  fltr = @filters[name] # находит фильтр по имени
+  @books.select{|b| fltr.call(b, *arg)} # фильтрует книжки найденным фильтром, передавая ему аргументы
+end
