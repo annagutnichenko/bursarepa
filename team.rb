@@ -18,14 +18,16 @@ class Team
     @seniors = @team[:seniors]
     @developers = @team[:developers]
     @juniors = @team[:juniors]
-
-    @mes_juns = @messages[:juniors]
   end
 
   def on_task (type, &block)
     @messages[type] = block[type]
     puts @messages[type]
-end
+  end
+
+  def priority(*pr)
+    @priority = pr
+  end
 
 # def on_task(dev)
 #   case dev
@@ -38,43 +40,33 @@ end
 #   end
 # end
 
-# def on_task(type, &block)
-# instance_eval &block
-#  on_task.call
-# end
+  def have_seniors(*names)
+    @team[:seniors] = names.map { |name| SeniorDeveloper.new(name) }
+  end
 
-# def add_task(task)
-#   dev.add_task(task)
-#   block.call(dev, task)
-# end
+  def have_developers(*names)
+    @team[:developers] = names.map { |name| Developer.new(name) }
+  end
 
-def have_seniors(*names)
-  @team[:seniors] = names.map { |name| SeniorDeveloper.new(name) }
-end
+  def have_juniors(*names)
+    @team[:juniors] = names.map { |name| JuniorDeveloper.new(name) }
+  end
 
-def have_developers(*names)
-  @team[:developers] = names.map { |name| Developer.new(name) }
-end
+  def seniors
+    @seniors
+  end
 
-def have_juniors(*names)
-  @team[:juniors] = names.map { |name| JuniorDeveloper.new(name) }
-end
+  def juniors
+    @juniors
+  end
 
-def seniors
-  @seniors
-end
+  def developers
+    @developers
+  end
 
-def juniors
-  @juniors
-end
-
-def developers
-  @developers
-end
-
-def all
-  @team.values.flatten
-end
+  def all
+    @team.values.flatten
+  end
 
 end
 
@@ -83,7 +75,7 @@ team = Team.new do
   have_developers("Олеся", "Василий", "Игорь-Богдан")
   have_juniors("Владислава", "Аркадий", "Рамеш")
   on_task(:junior => "Отдали задачу джуну, следите за ним!", :developer => "Отдали задачу деву, следите за ним!", :senior => "Отдали задачу синиору, следите за ним!")
-#  priority(:juniors, :developers, :seniors)
+  priority(:juniors, :developers, :seniors)
 end
 
 team.on_task(:senior)
