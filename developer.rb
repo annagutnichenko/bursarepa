@@ -9,9 +9,10 @@ class Developer
   end
 
   MAX_TASKS = 10
+  TYPE = 'developer'
 
   def type
-    @type='developer'
+    self.class::TYPE
   end
 
   def max_tasks

@@ -20,10 +20,10 @@ class Team
     @juniors = @team[:juniors]
   end
 
-  #def on_task (type, &block)
-    #@messages[type] = block[type]
-   # puts @messages[type]
-  #end
+  def on_task (type, &block)
+    @messages[type] = block
+    @messages[type].call
+  end
 
   def priority(*pr)
     @priority = pr
@@ -76,11 +76,20 @@ team = Team.new do
   have_seniors("Олег", "Оксана")
   have_developers("Олеся", "Василий", "Игорь-Богдан")
   have_juniors("Владислава", "Аркадий", "Рамеш")
-#  on_task(:junior => "Отдали задачу джуну, следите за ним!", :developer => "Отдали задачу деву, следите за ним!", :senior => "Отдали задачу синиору, следите за ним!")
   priority(:juniors, :developers, :seniors)
+  on_task :junior do |dev, task|
+    puts "Отдали задачу #{task} разработчику #{dev.name}, следите за ним!"
+  end
+  on_task :developer do |dev, task|
+    puts "Отдали задачу #{task} разработчику #{dev.name}, следите за ним!"
+  end
+  on_task :senior do |dev, task|
+    puts "#{dev.name} сделает #{task}, но просит больше с такими глупостями не приставать"
+  end
+
 end
 
-#team.on_task(:senior)
+team.on_task(:senior)
 team.priority
 
 

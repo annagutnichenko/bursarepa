@@ -4,7 +4,11 @@ class SeniorDeveloper < Developer
 
   MAX_TASKS = 15
 
-  var type :senior
+  TYPE = 'senior'
+
+  def type
+    self.class::TYPE
+  end
 
   def add_task(task)
     @task = task
