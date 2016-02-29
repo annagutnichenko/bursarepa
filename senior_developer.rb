@@ -4,7 +4,7 @@ class SeniorDeveloper < Developer
 
   MAX_TASKS = 15
 
-  TYPE = 'senior'
+  TYPE = :senior
 
   def type
     self.class::TYPE

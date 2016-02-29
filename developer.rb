@@ -1,6 +1,8 @@
 class Developer
 
   attr_reader :type
+  attr_reader :tasks_number
+  attr_reader :name
 
   def initialize(name)
     @name = name
@@ -8,8 +10,9 @@ class Developer
     @tasks_list = []
   end
 
+
   MAX_TASKS = 10
-  TYPE = 'developer'
+  TYPE = :developer
 
   def type
     self.class::TYPE
@@ -17,6 +20,10 @@ class Developer
 
   def max_tasks
     self.class::MAX_TASKS
+  end
+
+  def number_of_tasks
+    @tasks_list.length
   end
 
   def add_task(task)

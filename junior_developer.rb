@@ -3,7 +3,7 @@ require_relative "developer.rb"
 class JuniorDeveloper < Developer
 
   MAX_TASKS = 5
-  TYPE = 'junior'
+  TYPE = :junior
 
   def type
     self.class::TYPE
