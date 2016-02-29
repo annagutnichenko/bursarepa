@@ -16,7 +16,7 @@ class JuniorDeveloper < Developer
   def add_task(task)
     @task = task
     @tasks_number += 1
-    p "#{@name}: добавлена задача #{task}. Всего в списке задач: #{@tasks_number}"
+    puts "#{@name}: добавлена задача #{task}. Всего в списке задач: #{@tasks_number}"
     @tasks_list << @task
     raise "Слишком много работы!" if @tasks_number >= MAX_TASKS
   end

@@ -22,25 +22,17 @@ class Team
 
   def on_task (type, &block)
     @messages[type] = block
-    @messages[type].call
+  end
+
+  def add_task(task)
+      sorted_team = @team.values.flatten.select{|x| x.can_add_task?}.sort_by{|x| [@priority.index(x.type), x.tasks.count]}
+     p sorted_team
+    @messages[:team].call('первый аргумент', 'второй')
   end
 
   def priority(*pr)
-    @priority = pr
-    sorted_team = @team.select{|x| x.can_add_task?}.sort_by{|x| [@priority.index(x.type), x.task_list.count]}
-    p sorted_team
+   @priority = pr
   end
-
-# def on_task(dev)
-#   case dev
-#     when :junior
-#       puts "разработчику  следите за ним!"
-#     when :senior
-#       puts "но просит больше с такими глупостями не приставать"
-#     when :developer
-#       puts "dev"
-#   end
-# end
 
   def have_seniors(*names)
     @team[:seniors] = names.map { |name| SeniorDeveloper.new(name) }
@@ -78,19 +70,19 @@ team = Team.new do
   have_juniors("Владислава", "Аркадий", "Рамеш")
   priority(:juniors, :developers, :seniors)
   on_task :junior do |dev, task|
-    puts "Отдали задачу #{task} разработчику #{dev.name}, следите за ним!"
+    puts "Отдали задачу #{task} джуниору #{dev}, следите за ним!"
   end
   on_task :developer do |dev, task|
-    puts "Отдали задачу #{task} разработчику #{dev.name}, следите за ним!"
+    puts "Отдали задачу #{task} разработчику #{dev}, следите за ним!"
   end
   on_task :senior do |dev, task|
-    puts "#{dev.name} сделает #{task}, но просит больше с такими глупостями не приставать"
+    puts "#{dev} сделает #{task}, но просит больше с такими глупостями не приставать"
   end
 
 end
 
-team.on_task(:senior)
-team.priority
+# team.on_task(:senior)
+team.add_task('fd')
 
 
 
