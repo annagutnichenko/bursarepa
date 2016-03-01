@@ -8,7 +8,6 @@ class Team
   attr_reader :developers
   attr_reader :juniors
   attr_reader :team
-  attr_reader :mes_juns
 
 
   def initialize (&block)
@@ -31,9 +30,10 @@ class Team
 
   def add_task(task)
     @priority.each do |priority|
-      member = @team[priority].sort_by { |dev| dev.tasks.size }.first
-      if member.max_tasks > member.tasks_number
-        @messages[member.type].call(member, task)
+      sorted = @team[priority].sort_by { |dev| dev.tasks_number }.first
+      @sorted_all = @team[priority].sort_by { |dev| dev.tasks_number }
+      if sorted.max_tasks > sorted.tasks_number
+        @messages[sorted.type].call(sorted, task)
         break
       end
     end
@@ -67,6 +67,12 @@ class Team
     @team.values.flatten
   end
 
+  def report
+    @sorted_all.each do |dev|
+      puts "#{dev.name.join} (#{dev.dev_type.to_s[0...-1].to_sym}): #{dev.tasks_number.join(' ')}"
+    end
+  end
+
 end
 
 team = Team.new do
@@ -87,7 +93,7 @@ team = Team.new do
 end
 
 # team.on_task(:senior)
-team.add_task('погладить шнурки')
+team.report
 
 
 

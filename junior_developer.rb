@@ -34,3 +34,8 @@ class JuniorDeveloper < Developer
 
 end
 
+jun = JuniorDeveloper.new('sa')
+jun.add_task('task')
+
+
+

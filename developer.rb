@@ -22,10 +22,6 @@ class Developer
     self.class::MAX_TASKS
   end
 
-  def number_of_tasks
-    @tasks_list.length
-  end
-
   def add_task(task)
     @task = task
     @tasks_number += 1
