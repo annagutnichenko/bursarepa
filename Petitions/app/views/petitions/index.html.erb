@@ -1,2 +1,10 @@
-<h1>Petitions#index</h1>
-<p>Последние петиции</p>
+<h1>Petitions</h1>
+
+<div id="petitions">
+  <% @petitions.each do |petition| %>
+      <h2>
+        <%= link_to petition.name, petition %>
+      </h2>
+      <div class="content"><%= petition.content %></div>
+  <% end %>
+</div>

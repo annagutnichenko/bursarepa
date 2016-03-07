@@ -1,2 +1,6 @@
-<h1>Последние петиции</h1>
-<a href="http://localhost:3000/petitions/vhod">Вход</a>
+
+<h1><%= @petition.name %></h1>
+<%= @petition.content %>
+<p>
+  <%= link_to "Edit", edit_petition_path(@petition) %> |
+</p>
