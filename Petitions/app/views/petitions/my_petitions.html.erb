@@ -1,11 +1,11 @@
-<h1>Все петиции</h1>
+<h1>Мои петиции</h1>
 <table>
   <tr>
     <th>Петиция</th>
     <th>Автор</th>
   </tr>
 
-  <% @petitions.each do |petition| %>
+  <% current_user.petitions.each do |petition| %>
       <tr>
         <td><%= petition.title %></td>
         <td><%= petition.author %></td>
