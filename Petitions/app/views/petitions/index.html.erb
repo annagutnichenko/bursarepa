@@ -1,15 +1,11 @@
-<h1>Все петиции</h1>
-<table>
-  <tr>
-    <th>Петиция</th>
-    <th>Автор</th>
-  </tr>
+<h1>Все петиции </h1>
 
-  <% @petitions.each do |petition| %>
-      <tr>
-        <td><%= petition.title %></td>
-        <td><%= petition.author %></td>
-        <td><%= link_to 'Просмотр', petition_path(petition) %></td>
-      </tr>
+<div>
+  <% flash.each do |name, msg| %>
+      <%= msg %>
   <% end %>
-</table>
+</div>
+
+<%= link_to 'Выйти', logout_path%>
+<%= link_to 'Зарегистрироваться',signup_path %>
+<%= link_to 'Войти', login_path %>

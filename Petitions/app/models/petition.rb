@@ -1,4 +1,4 @@
-class Petitions < ActiveRecord::Base
+class Petition < ActiveRecord::Base
 
 
   belongs_to :user
