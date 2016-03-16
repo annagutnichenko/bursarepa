@@ -1,10 +1,14 @@
 class User < ActiveRecord::Base
-  validates :email, presence: true
   has_secure_password
 
   has_many :petitions
+  has_many :votes
 
-  attr_accessible :email, :password
+  validates :email, presence: true
+  validates :first_name, presence: true
+  validates :last_name, presence: true
 
-  validates_uniqueness_of :email
+  def name
+    "#{first_name} #{last_name}"
+  end
 end

@@ -1,13 +1,9 @@
 class Petition < ActiveRecord::Base
-
-
   belongs_to :user
 
-  validates :title,  :presence => true,
-            :uniqueness => true,
-            :length => {:minimum => 1}
+  has_many :votes
 
-  validates :text, :presence => true,
-            :length => {:minimum => 1},
-            :uniqueness => true
+  def voted_by?(user)
+    votes.where(user_id: user.id).any?
+  end
 end

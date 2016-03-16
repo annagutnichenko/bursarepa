@@ -1,15 +1,24 @@
-<h1> Петиция № <%= @petition.id %></h1>
+<h2>Петиция</h2>
+
+<h3><%= @petition.title %></h3>
+
 <p>
-  <strong>Название:</strong>
-  <%= @petition.title %>
+  <%= @petition.created_at.strftime('%d/%m/%Y %H:%M')  %>
 </p>
 
 <p>
-  <strong>Описание:</strong>
-  <%= @petition.text %>
+  <%= @petition.description %>
 </p>
 
 <p>
-  <strong>Автор:</strong>
-  <%= @petition.author %>
+  <b>Голосов:</b>
+  <%= @petition.votes.count %>
+</p>
+
+<p>
+  <% if @petition.voted_by?(current_user) %>
+      Вы уже проголосовали за данную петицию
+  <% else %>
+      <%= button_to('Поддержать', votes_path({ petition_id: @petition.id }) ) %>
+  <% end %>
 </p>
